@@ -88,7 +88,7 @@ fun TicTacToeScreen() {
         modifier = Modifier.padding(8.dp).fillMaxSize()
     ) { padding ->
         Box(
-            modifier = Modifier.padding(16.dp).fillMaxSize(),
+            modifier = Modifier.padding(15.dp).fillMaxSize(),
             contentAlignment = Alignment.Center
         ){
             Column(){
