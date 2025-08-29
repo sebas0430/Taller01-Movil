@@ -17,40 +17,45 @@ import androidx.compose.ui.unit.sp
 import com.javeriana.taller01.R
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.ui.graphics.Color
+import androidx.navigation.NavController
 
 //funcion composable para el logo de tic tac toe
 @Composable
-fun LogoTicTacToe() {
+fun LogoTicTacToe(onClick: () -> Unit) {
     Image(
         //referencia del logo
         painter = painterResource(R.drawable.logo_tic_tac_toe),
         //decripcion del logo
         contentDescription = "Tic Tac Toe",
         //modificador del logo para que sea clickable
-        modifier = Modifier.padding(18.dp).clickable{println("imagen presionada de tic tac toe")}
+        modifier = Modifier.padding(18.dp).clickable{ onClick() }
 
     )
 }
 
 //funcion composable para el logo de formula 1
 @Composable
-fun LogoFormula1(){
+fun LogoFormula1(onClick: () -> Unit){
     Image(
         //referencia del logo
         painter = painterResource(R.drawable.logo_formula_1),
         //decripcion del logo
         contentDescription = "Formula 1 info",
         //modificador del logo para que sea clickable
-        modifier = Modifier.padding(18.dp).clickable{println("imagen presionada de F1")}
+        modifier = Modifier.padding(18.dp).clickable{ onClick() }
     )
 }
 
 //funcion composable para el cuerpo de la pantalla principal
 @Composable
-fun BodyHomeScreen(){
+fun HomeScreen(navController: NavController){
+
+
     // Scaffold para la estructura de la pantalla
     Scaffold(
-    modifier = Modifier.fillMaxSize()
+        containerColor = Color(0xFF7980CB),
+        modifier = Modifier.fillMaxSize()
     ){ padding ->
         // Modificaciones de la columna
     Column(
@@ -71,7 +76,9 @@ fun BodyHomeScreen(){
         )
 
         //logo de tic tac toe
-        LogoTicTacToe()
+        LogoTicTacToe(
+            onClick = { navController.navigate("tictactoe") }
+        )
 
         //Titulo del formula 1
         Text(
@@ -82,13 +89,16 @@ fun BodyHomeScreen(){
         )
 
         //logo de formula 1
-        LogoFormula1()
+        LogoFormula1(
+            onClick = {navController.navigate("formula1")}
+        )
     }
 }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun BodyHomeScreenPreview(){
-    BodyHomeScreen()
+fun HomeScreenPreview(){
+    val navController = androidx.navigation.compose.rememberNavController()
+    HomeScreen(navController = navController)
 }
